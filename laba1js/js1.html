@@ -1,0 +1,214 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>
+		JS лаб. работа №1
+	</title>
+	<script type="text/javascript">
+		bc = function() {
+			var fm = document.getElementById("fm").value;
+			var im = document.getElementById("im").value;
+			var ot = document.getElementById("ot").value;
+			var answer = confirm("Фамилия: " + fm +"\nИмя: " + im + "\nОтчество: " + ot +"\nВерно?");
+			if (answer == true) {
+				alert("Здравствуйте, "+fm+" "+im+" "+ot);
+			} else {
+				alert("Ошибка!");
+			}
+		}
+		bc2 = function() {
+			var xv = document.getElementById("xv").value;
+			var yv = document.getElementById("yv").value;
+			var op = document.getElementById("op").value;
+			switch(op) {
+				case "+":
+					result.innerHTML = String(Number(xv) + Number(yv));
+					break;
+				case "-":
+					result.innerHTML = String(Number(xv) - Number(yv));
+					break;
+				case "*":
+					result.innerHTML = String(Number(xv) * Number(yv));
+					break;
+				case "/":
+					if (yv != 0) {
+						result.innerHTML = String(Number(xv)/Number(yv));
+					} else {
+						alert("Ошибка деления на 0!");
+					}
+					break;
+				default:
+					alert("Ошибка со знаком операции!");
+					break;
+			}
+		}
+		bc3 = function() {
+			var av = document.getElementById("av").value;
+			var x, v = 0, r = 0, mod, div, a;
+			a = parseInt(av, 10);
+			if (a > 9) {
+				x = Number((a).toString(2));
+				a = x;
+				while (x > 1){
+					mod = Math.round(x % 10);
+					if (mod == 1){
+						v = 1;
+						break;
+					}
+					x = x / 10;
+				}
+				if (v == 1){
+					while (x > 1) {
+						mod = Math.round(x % 10);
+						if (mod == 0){
+							r++;
+						}
+						x = x / 10;
+					}
+				}
+				result2.innerHTML = r + " (" + a + ")";
+			} else {
+				result2.innerHTML = "Условие задачи N > 9!!!";
+			}
+		}
+	</script>
+	<style type="text/css">
+		table {
+			border-collapse: collapse;
+		}
+		td {
+			width: 50px;
+			height: 50px;
+		}
+		.r1 {
+			background-color: gray;
+		}
+		.r2 {
+			background-color: darkblue;
+		}
+	</style>
+</head>
+<body>
+	<p>
+		<b>Задание 16:</b><br>
+		Дано натуральное число N (N > 9). Определить количество нулей в цифровой записи числа, кроме нулей в младших разрядах.<br>
+		<b>Вариант показа:</b><br>
+		2<br><br><br>
+		<b>Выполнение лабораторной работы:</b><br>
+		<b>Задание 1:</b><br>
+	</p>
+	<table border="solid">
+		<tr>
+			<td>Фамилия</td>
+			<td>Имя</td>
+			<td>Отчество</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>
+				<input type="text" id="fm"/>
+			</td>
+			<td>
+				<input type="text" id="im"/>
+			</td>
+			<td>
+				<input type="text" id="ot"/>
+			</td>
+			<td>
+				<input type="button" onClick="bc();" value="Отправить"/>
+			</td>
+		</tr>
+	</table>
+	<p>
+		<br><b>Задание 2:</b><br>
+	</p>
+	<table border="solid">
+		<tr>
+			<td>X</td>
+			<td>
+				<input type="text" id="xv"/>
+			</td>
+			<td>
+				<input type="button" onClick="bc2();" value="Отправить"/>
+			</td>
+		</tr>
+		<tr>
+			<td>Y</td>
+			<td>
+				<input type="text" id="yv"/>
+			</td>
+		</tr>
+		<tr>
+			<td>Операция:</td>
+			<td>
+				<input type="text" id="op"/>
+			</td>
+		</tr>
+		<tr>
+			<td>Результат:</td>
+			<td>
+				<p id="result"></p>
+			</td>
+		</tr>
+	</table>
+	<p>
+		<br><b>Задание 3:</b><br>
+	</p>
+	<script type="text/javascript">
+		var str, n = 8, i, j;
+		document.write("<table>");
+		for (i = 0; i < 10; i++) {
+			document.write("<tr>");
+			for (j = 0; j < 10; j++) {
+				if (j < n) {
+					str = "class='r1'";
+				} else {
+					str = "class='r2'";
+				}
+				document.write("<td " + str + "></td>");
+			}
+			document.write("</tr>");
+			n--;
+		}
+		document.write("</table><br>");
+		var sel;
+		document.write("<table>");
+		for (i = 0; i < 10; i++) {
+			document.write("<tr>");
+			for (j = 0; j < 10; j++) {
+				sel = (i+j+2)%4;
+				if (sel == 0) {
+					str = "class='r1'";
+				} else {
+					str = "class='r2'";
+				}
+				document.write("<td " + str + "></td>");
+			}
+			document.write("</tr>");
+		}
+		document.write("</table>");
+	</script>
+	<p>
+		<br><b>Задание 4:</b><br>
+		Дано натуральное число N (N > 9). Определить количество нулей в цифровой записи числа, кроме нулей в младших разрядах.<br>
+	</p>
+	<table border="solid">
+		<tr>
+			<td>A</td>
+			<td>
+				<input type="text" id="av"/>
+			</td>
+			<td>
+				<input type="button" onClick="bc3();" value="Отправить"/>
+			</td>
+		</tr>
+		<tr>
+			<td>Результат:</td>
+			<td>
+				<p id="result2"></p>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

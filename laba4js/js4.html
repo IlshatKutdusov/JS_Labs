@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+ <head><meta charset="UTF-8"><title></title></head>
+ <body>
+ 	<p>?x0=300&y0=300&k=10</p>
+ </body>
+<script type="text/javascript">
+/* параметры из URI:
+ ../lab4js/test1.html?x0=300&y0=300 */
+	var x0 = Number(getUrlParameter("x0"));
+	var y0 = Number(getUrlParameter("y0"));
+	var k = Number(getUrlParameter("k"));
+	graph(x0,y0,100,100,300);
+	line(90, 310,y0);
+	linev(x0,90,320);
+	linegrid(90,310,90,320);
+	
+	function graph(mx,my,y,x1,x2) {
+		 var xstr = "";
+		 var xstr0 = "<img src='pixel.png' width=2 height=2 style='position:absolute;";
+		 var x = -100;
+		 while (x < 1) {
+		 	if((my - k*Math.pow(Math.log(1 - x), 2)) >= y && (mx + x) >= x1 && (mx + x) <= x2){
+		 		xstr += xstr0 + "margin-top:" + (2*(my - k*Math.pow(Math.log(1 - x), 2)) + 216) + "px;margin-left:" + 2*(mx + x) + "px'>";	
+		 	}
+			 if (x >= -0.5) {
+			 	x += 0.001;
+			 } else {
+			 	x += 0.1/k;
+			}
+		 }
+		 document.write(xstr);
+	}
+	function linev(x,y1,y2) {
+		 var xstr = "";
+		 var xstr0 = "<div style='position:absolute;";
+		 var y = y1;
+		 while (y <= y2) {
+			 xstr += xstr0 + "margin-top:" + (2*y+200) + "px;margin-left:" + 2*x + "px'>.</div>";
+			 y += 0.5;
+			}
+		 document.write(xstr);
+	}
+	function line(x1,x2,y) {
+		 var xstr = "";
+		 var xstr0 = "<div style='position:absolute;";
+		 var x = x1;
+		 while (x <= x2) {
+			 xstr += xstr0 + "margin-top:" + (2*y+200) + "px;margin-left:" + 2*x + "px'>.</div>";
+			 x += 0.5;
+			}
+		 document.write(xstr);
+	}
+	function linegrid(x1,x2,y1,y2) {
+		var xstr = "";
+		var xstr0 = "<div style='position:absolute;";
+		var x = x1;
+		while (x <= x2) {
+		 	if (x == 110 || x == 140 || x == 170 || x == 230 || x == 260 || x == 290) {
+		 		var xstr = "";
+			 	var y = y1 + 5;
+			 	while (y <= y2 - 5) {
+				for (var i = 0; i < 10; i++) {
+			 		xstr += xstr0 + "margin-top:" + (2*y+200) + "px;margin-left:" + 2*x + "px'>.</div>";
+			 		y += 0.5;
+				}
+				y += 5;
+			 	}
+			 	document.write(xstr);
+			}
+			x += 0.5;
+		}
+
+		var ystr = "";
+		var ystr0 = "<div style='position:absolute;";
+		var y = y1;
+		while (y <= y2) {
+		 	if (y == 120 || y == 150 || y == 180 || y == 210 || y == 240 || y == 270) {
+		 		var ystr = "";
+			 	var x = x1 + 5;
+			 	while (x <= x2 - 5) {
+				for (var i = 0; i < 10; i++) {
+			 		ystr += ystr0 + "margin-top:" + (2*y+200) + "px;margin-left:" + 2*x + "px'>.</div>";
+			 		x += 0.5;
+				}
+				x += 5;
+			 	}
+			 	document.write(ystr);
+			}
+			y += 0.5;
+		}
+	}
+	function getUrlParameter(sParam) {
+	var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+	sURLVariables = sPageURL.split('&'), sParameterName, i;
+	for (i = 0; i < sURLVariables.length; i++) {
+		sParameterName = sURLVariables[i].split('=');
+		if (sParameterName[0] === sParam) {
+			return sParameterName[1] === undefined ? false : sParameterName[1];
+		}
+	  }
+	}
+	
+		/*
+			1. Обеспечить масштабирование графика функции по оси абсцисс либо ординат через
+			коэффициент пропорциональности указываемый в параметре URI14: 1 — по оси ординат.
+			2. Координатная сетка (по умолчанию — это шесть горизонтальных линий и шесть
+			вертикальных линий, плюс оси координат): 1 — штрихпунктирная.
+			3. Обеспечить масштабирование координатной сетки через коэффициент
+			пропорциональности указываемый в параметре URI для: 1 — ординат.
+			То есть чем больше этот коэффициент, тем чаще идут горизонтальные либо
+			вертикальные линии.
+			4. Передача функции15, вычисляющей данную математическую формулу, через параметр
+			в функцию, строящую график: 1 — да.
+			5. Расположение графика в указанной четверти экрана: 10 — третьей.
+			6. Математическая формула для отображения графика функции:
+			0100 — ln^2(1-x)
+		*/
+</script>
+</html>

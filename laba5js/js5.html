@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>laba js #5</title>
+ </head>
+ <body>  
+   <p><select id="value">
+    <option disabled>Выберите номинал</option>
+    <option value="2">Двойка</option>
+    <option value="3">Тройка</option>
+    <option value="4">Четверка</option>
+    <option value="5">Пятерка</option>
+    <option value="6">Шестерка</option>
+    <option value="7">Семерка</option>
+    <option value="8">Восьмерка</option>
+    <option value="9">Девятка</option>
+    <option value="10">Десятка</option>
+    <option value="11">Валет</option>
+    <option value="12">Дама</option>
+    <option value="13">Король</option>
+    <option value="14">Туз</option>
+   </select>
+
+   <select id="suit">
+    <option disabled>Выберите масть</option>
+    <option value="0">Пики</option>
+    <option value="1">Червы</option>
+    <option value="2">Бубны</option>
+    <option value="3">Крести</option>
+   </select>
+  <input type="button" value="Добавить" onClick="add();" > </p>
+  <p><input id="hand1"  disabled>
+  <input id="hand2" disabled>
+  <input id="hand3" disabled>
+  <input id="hand4" disabled>
+  <input id="hand5" disabled></p>
+
+  <p><input type="button" value="Пара" onClick="isItPair()"> <p id="pair">Проверка</p></p>
+  <p><input type="button" value="Стрит-флеш" onClick="isItStreetFlush()"> <p id="streetFlush">Проверка</p></p>
+
+ </body>
+
+ <script type="text/javascript">
+
+   var values = ["двойка","тройка","четверка","пятерка","шестерка", "семерка","восьмерка","девятка","десятка","валет","дама","король","туз"];
+   var suits = ["пик", "червей", "бубен", "крестей"];
+   var cards = 0;
+   var hands = [hand1, hand2, hand3, hand4, hand5];
+   var value = document.getElementById("value");
+   var suit = document.getElementById("suit");
+   var street = document.getElementById("street");
+   var royalFlush = document.getElementById("royalFlush");
+   var i = 0;
+   var k = 0;
+   var j = 0;
+   var isStreet = false;
+   var isPair1 = false;
+   var isPair2 = false;
+   var isStreetFlush = false;
+   var isSuitsTheSame = false;
+
+   var valuesMas = [];
+   var suitsMas = [];
+
+   var add = function(){
+     if(hands[i].value == "" && i < 5){
+      hands[i].value = values[value.value - 2] + " " + suits[suit.value];
+      valuesMas[i] = value.value;
+      suitsMas[i] = suit.value;
+      i++;
+     }
+  }
+
+  var isItPair = function(){
+    for(j = 0; j < valuesMas.length; j++) {
+		if(isPair1 == true){
+		  for(i = 0; i < valuesMas.length; i++){
+		  if(valuesMas[j] == valuesMas[i]){
+			isPair2 = true;
+			break;
+		  } 
+		}
+		}
+		for(i = 0; i < valuesMas.length; i++){
+		  if(valuesMas[j] == valuesMas[i]){
+			isPair1 = true;
+			delete valuesMas[i];
+			delete valuesMas[j];
+			break;
+		  }
+		 if(isPair2 == true){
+		 	break;
+		 }
+		}
+	}
+	
+    if(isPair2 == true){
+      pair.innerHTML = "Да";
+    } else{
+      pair.innerHTML = "Нет";
+    }
+  }
+
+  var isItStreetFlush = function(){
+  	for(k = 0; k < 5; k++){
+      if(valuesMas[k] == valuesMas[k + 1] - 1){
+        isStreet = true;
+      }
+      else{
+        break;
+      }
+    }
+    for(i = 0; i < 5; i++){
+      if(suitsMas[i] == suitsMas[i + 1]){
+        isSuitsTheSame = true;
+      }
+      else{
+        break;
+      }
+    }
+    if(isSuitsTheSame == true && isStreet == true){
+      streetFlush.innerHTML = "Да";
+    }
+    else{
+      streetFlush.innerHTML = "Нет";
+    }
+  }
+ </script>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script type="text/javascript">
+		pclick = function(){
+			alert("Решение выполняется!");
+			var av = document.getElementById("aval").value;
+			var bv = document.getElementById("bval").value;
+			if(isNaN(av) || isNaN(bv)){
+				alert("Некорректный ввод");
+				return;
+			}
+			else{
+				presult(av, bv);
+			}
+		}
+		presult = function(av, bv){
+			var line = {};
+			var sum = 0;
+			var kv = document.getElementById("kval").value;
+			line.a = Number(av);
+			line.b = Number(bv);
+			line.k = String(kv);
+			for(var i = line.a; i<=line.b; i++){
+				var object = {};
+				object.int = String(i);
+					for(var j = 0; j<String(i).length; j++){
+						if(line.k == object.int[j]){
+							sum = sum+Number(object.int);
+							alert("k=" + line.k + " object.int=" + object.int);
+							break;
+						}
+					}
+			}
+			result.innerHTML = sum;
+		}
+	</script>
+</head>
+<body>
+	<p>
+		<br> <b> Задание 26 </b> <br>
+		Вычислить сумму тех чисел из заданного отрезка [a,b] (a, b — натуральные), в запись
+которых входит цифра k. <br> <br>
+</p>
+<table>
+	<tr>
+		<td> <b> Решение: </b> </td>
+	</tr>
+	<tr>
+		<td>
+			<p align="center"> <b>A</b></p>
+		</td>
+		<td>
+			<input type="text" id="aval"/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p align="center"> <b>B</b></p>
+		</td>
+		<td>
+			<input type="text" id="bval">
+		</td>
+	</tr>
+		<tr>
+		<td>
+			<p align="center"> <b>K</b></p>
+		</td>
+		<td>
+			<input type="text" id="kval">
+		</td>
+	</tr>
+</table>
+<p onclick="pclick();"> <b> Ответ: </b></p>
+<p id="result"></p>
+</table>
+</body>
+</html>

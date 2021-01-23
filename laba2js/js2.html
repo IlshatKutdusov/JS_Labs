@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>
+		JS лаб. работа №2
+	</title>
+	<script type="text/javascript">
+		bc1 = function() {
+			alert("Решение выполняется!");
+			var nv = document.getElementById("nval").value;
+			var	mv = document.getElementById("mval").value;
+			if ((Number(nv) < 9999)&(Number(mv) < 9999)) {
+				bc2(nv, mv);
+			} else {
+				alert("Ошибка! N < 9999 and M < 9999");
+			}
+		}
+		bc2 = function(nv, mv) {
+			var nmvalues = {
+				n : nv,
+				m : mv
+			};
+			var i, j, k = 0, nk = nmvalues.n.length, mk = nmvalues.m.length;
+			for (i = 0; i < nk; i++) {
+				for (j = 0; j < mk; j++)
+					if (nmvalues.n[i] == nmvalues.m[j]) {
+						k++;
+						break;
+					};
+				if (k == 2)
+					break;
+			}
+			alert("Решение выполнено!");
+			if (k == 2){
+				result.innerHTML = "Есть";
+			} else {
+				result.innerHTML = "Нету";
+			}
+		}
+	</script>
+</head>
+<body>
+	<p>
+		<br><b>Задание 2:</b><br>
+		Даны два натуральных числа m и n (m < 9999, n < 9999). Проверить, есть ли в записи числа m цифры, совпадающие с цифрами в записи числа n.<br><br>
+	</p>
+	<table>
+		<tr>
+			<td><b>Решение:</b></td>
+		</tr>
+		<tr>
+			<td>
+				<p align="center"><b>N<b/></p>
+			</td>
+			<td>
+				<input type="text" id="nval" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p align="center"><b>M<b/></p>
+			</td>
+			<td>
+				<input type="text" id="mval" />
+			</td>
+		</tr>
+	</table>
+	<input type="button" onClick="bc1();" value="Отправить">
+	<p><b>Ответ:</b></p>
+	<p id="result"></p>
+</body>
+</html>
